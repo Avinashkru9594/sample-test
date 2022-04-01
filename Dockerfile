@@ -1,4 +1,5 @@
-FROM tomcat:latest
-RUN cp -R  /opt/apache-tomcat-9.0.60/webapps/*  /usr/local/tomcat/webapps
-COPY ./*.war /usr/local/tomcat/webapps
+FROM tomcat 
+WORKDIR webapps 
+COPY --from=maven /usr/src/mymaven/target/java-tomcat-maven-example.war .
+RUN rm -rf ROOT && mv java-tomcat-maven-example.war ROOT.war
 
